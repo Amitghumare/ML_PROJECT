@@ -1,0 +1,44 @@
+import os
+from pathlib import Path
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+project_name = "ML_PROJECT"
+
+list_of_files=[
+    f"src/ML_PROJECT/__init__.py",
+    f"src/ML_PROJECT/components/__init__.py",
+    f"src/ML_PROJECT/components/data_ingestion.py",
+    f"src/ML_PROJECT/components/data_transformation.py",
+    f"src/ML_PROJECT/components/model_trainer.py",
+    f"src/ML_PROJECT/components/model_monitering.py",
+    f"src/ML_PROJECT/pipelines/__init__.py",
+    f"src/ML_PROJECT/components/training_pipeline.py",
+    f"src/ML_PROJECT/components/prediction_pipeline.py",
+    f"src/ML_PROJECT/exception.py",
+    f"src/ML_PROJECT/logger.py",
+    f"src/ML_PROJECT/utils.py",
+    "main.py",
+    "app.py",
+    "Dockerfile",
+    "requirements.txt",
+    "setup.py"
+]
+
+for filepath in list_of_files:
+    filepath=Path(filepath)
+    filedir, filename=os.path.split(filepath)
+
+    if filedir !="":
+        os.makedirs(filedir, exist_ok=True)
+        logging.info(f"Creating directory:{filedir} for the file {filename}")
+
+
+    if (not os.path.exists(filepath)) or (os.path.getsize(filepath)==0):
+        with open(filepath, "w") as f:
+            pass
+            logging.info(f"Creating empty file:{filepath}")
+
+    else:
+        logging.info(f"{filename} is already exists")
